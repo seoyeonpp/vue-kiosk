@@ -1,0 +1,15 @@
+.v-main {
+    background: url(@/assets/images/cool-background.svg) no-repeat center;
+    background-size: cover;
+}
+
+.container {
+    padding-bottom: 200px !important;
+}
+
+.v-footer {
+    position: fixed !important;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
