@@ -4,9 +4,9 @@ module.exports = defineConfig({
     lintOnSave: false,
     css: {
         loaderOptions: {
-            sass: {
-                data: `
-                    @import "@/assets/scss/base/_base.scss";
+            scss: {
+                additionalData: `
+                    @import "@/assets/scss/base/_variables.scss";
                 `,
             },
         },
