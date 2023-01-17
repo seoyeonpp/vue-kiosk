@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import MainView from "@/views/MainView";
 
 Vue.use(VueRouter);
 
@@ -8,7 +9,7 @@ export const router = new VueRouter({
     routes: [
         {
             path: "/",
-            // redirect: "/news",
+            component: MainView
         },
     ],
 });
