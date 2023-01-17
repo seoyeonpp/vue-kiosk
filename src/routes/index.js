@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import MainView from "@/views/MainView";
+import OrderView from "@/views/OrderView";
 
 Vue.use(VueRouter);
 
@@ -9,7 +10,11 @@ export const router = new VueRouter({
     routes: [
         {
             path: "/",
-            component: MainView
+            component: MainView,
+        },
+        {
+            path: "/order",
+            component: OrderView,
         },
     ],
 });
