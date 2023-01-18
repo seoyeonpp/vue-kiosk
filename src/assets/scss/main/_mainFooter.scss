@@ -1,12 +1,35 @@
-.main-footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+.v-footer {
+    div:has(.basket-footer) {
+        width: 100%;
+    }
+}
 
-    * {
-        flex: 1;
-        padding: 40px;
-        text-align: center;
+.basket-footer {
+    width: 100%;
+    & > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        & > * {
+            padding: 40px;
+            text-align: center;
+            height: 100%;
+        }
+    }
+    .basket {
+        & > p {
+            span {
+                position: relative;
+            }
+        }
+        .delete-btn {
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            right: -20px;
+            transform: translateY(-50%);
+        }
     }
 }
