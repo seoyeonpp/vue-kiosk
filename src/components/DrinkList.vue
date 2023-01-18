@@ -8,11 +8,11 @@
             <v-col v-for="(drink, index) in drinkList" :key="index" cols="4">
                 <router-link to="/">
                     <v-card class="drink-card">
-                        <img :src="drink.img" alt="" />
+                        <button @click="deleteCard" v-if="isAdmin" class="delete-btn">삭제</button>
+                        <div class="drink-img"><img :src="drink.menuImg" alt="" /></div>
                         <div class="drink-info">
-                            <h3>{{ drink.title }}</h3>
-                            <p>{{ drink.price }}<span>원</span></p>
-                            <p>{{ isAdmin }}</p>
+                            <h3>{{ drink.menuName }}</h3>
+                            <p>{{ drink.menuCost }}<span>원</span></p>
                         </div>
                     </v-card>
                 </router-link>
@@ -37,6 +37,12 @@ export default {
         toggleAdmin() {
             this.$store.commit("SET_ADMIN");
         },
+        deleteCard() {
+            console.log("카드 삭제");
+        },
+    },
+    created() {
+        this.$store.dispatch("GET_DRINK_LIST");
     },
 };
 </script>

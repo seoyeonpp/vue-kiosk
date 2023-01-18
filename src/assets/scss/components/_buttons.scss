@@ -1,14 +1,29 @@
-.default-btn {
+.blue-btn {
     background-color: $blue;
+}
+.yellow-btn {
+    background-color: $light-yellow;
 }
 .admin-btn {
     position: fixed;
     top: 10px;
     left: 10px;
     z-index: 10;
-    background-color: $light-gray;
+    background-color: $light-yellow;
     color: $text-color;
     padding: 10px;
     border-radius: 10px;
     font-weight: bold;
+}
+
+.delete-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
+    width: 32px;
+    height: 32px;
+    text-indent: -9999999px;
+    background: url(@/assets/images/icon-delete.png) no-repeat center;
+    background-size: contain;
 }
