@@ -25,7 +25,7 @@ import { mapGetters } from "vuex";
 export default {
     data() {
         return {
-            menus: ["아메리카노", "자몽에이드", "카페라떼"],
+            menus: ["아메리카노", "자몽에이드", "카페라떼", "바닐라떼"],
         };
     },
     computed: {
