@@ -1,3 +1,14 @@
 .default-btn {
     background-color: $blue;
 }
+.admin-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    background-color: $light-gray;
+    color: $text-color;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
