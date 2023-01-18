@@ -5,6 +5,7 @@
                 <v-container>
                     <div class="panel__layout">
                         <div class="panel__layout_inner">
+                            <router-link to="/" class="back-btn"><v-btn color="primary" elevation="2">뒤로 가기</v-btn></router-link>
                             <h3 class="text-h3 font-weight-bold text-center">음료 등록</h3>
                             <v-row>
                                 <v-col>
@@ -39,12 +40,42 @@
                                 </v-col>
                             </v-row>
                             <v-row>
-                                <v-col>제공 온도</v-col>
-                                <v-col>
-                                    <v-checkbox v-model="ck1" label="red" color="red" value="red" hide-details />
+                                <v-col :cols="3">제공 온도</v-col>
+                                <v-col :cols="9">
+                                    <v-checkbox
+                                        v-model="temperType"
+                                        label="hot"
+                                        color="red"
+                                        value="hot"
+                                        hide-details
+                                        class="ma-0 pa-0 d-inline-flex"
+                                    />
+                                    <v-checkbox
+                                        v-model="temperType"
+                                        label="ice"
+                                        color="indigo"
+                                        value="ice"
+                                        hide-details
+                                        class="ma-0 ml-3 pa-0 d-inline-flex"
+                                    />
                                 </v-col>
-                                <v-col>
-                                    <v-checkbox v-model="ck1" label="indigo" color="indigo" value="indigo" hide-details />
+                            </v-row>
+                            <v-row class="mt-6">
+                                <v-col :cols="3">우유 변경 가능</v-col>
+                                <v-col :cols="9">
+                                    <v-radio-group v-model="milkOpt" row class="ma-0" mandatory>
+                                        <v-radio label="off" color="error" value="off" class="ma-0 mr-3 pa-0 d-inline-flex" />
+                                        <v-radio label="on" color="success" value="on" class="ma-0 pa-0 d-inline-flex" />
+                                    </v-radio-group>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col :cols="3">샷 추가 옵션</v-col>
+                                <v-col :cols="9">
+                                    <v-radio-group v-model="shotOpt" row class="ma-0" mandatory>
+                                        <v-radio label="off" color="error" value="off" class="ma-0 mr-3 pa-0 d-inline-flex" />
+                                        <v-radio label="on" color="success" value="on" class="ma-0 pa-0 d-inline-flex" />
+                                    </v-radio-group>
                                 </v-col>
                             </v-row>
                         </div>
@@ -78,6 +109,9 @@ export default {
         cost: "",
         checkbox: false,
         imgUrl: "temp.jpg",
+        milkOpt: null,
+        shotOpt: null,
+        temperType: [],
     }),
     methods: {
         submit() {
