@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import MainView from "@/views/MainView";
-import OrderView from "@/views/OrderView";
+import AddDrinkView from "@/views/AddDrinkView";
 
 Vue.use(VueRouter);
 
@@ -13,8 +13,8 @@ export const router = new VueRouter({
             component: MainView,
         },
         {
-            path: "/order",
-            component: OrderView,
+            path: "/addDrink",
+            component: AddDrinkView,
         },
     ],
 });
