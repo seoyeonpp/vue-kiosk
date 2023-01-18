@@ -9,7 +9,7 @@ export const router = new VueRouter({
     routes: [
         {
             path: "/",
-            component: MainView
+            component: MainView,
         },
     ],
 });

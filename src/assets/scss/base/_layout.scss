@@ -1,9 +1,10 @@
-.v-main {
-    background: url(@/assets/images/cool-background.svg) no-repeat center;
+#app {
+    background: url(@/assets/images/coffee.jpg) no-repeat center;
     background-size: cover;
 }
 
 .container {
+    padding-top: 80px !important;
     padding-bottom: 200px !important;
 }
 
