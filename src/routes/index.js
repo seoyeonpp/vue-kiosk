@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import MainView from "@/views/MainView";
+import OrderView from "@/views/OrderView";
 
 Vue.use(VueRouter);
 
