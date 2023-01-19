@@ -5,3 +5,4 @@ const config = {
 };
 
 export const mainList = () => axios.get(`${config.BASE_URL}/api/menu/list`);
+export const deleteList = (menuSeq) => axios.delete(`${config.BASE_URL}/manage/menu/${menuSeq}`);
