@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
             {
                 menuSeq: 18,
                 menuName: "따듯라",
-                menuCost: 5000000,
+                menuCost: 100,
                 menuImg: "https://reflexion-bucket.s3.ap-northeast-2.amazonaws.com/public/study/kiosk/temp/cc5dde0a-6b4d-4ce6-bee5-fbe16b4a297bC9A4F364-E88F-484D-861C-7D50C3D9DB28.jpeg",
                 menuOptionMap: {
                     1: [
