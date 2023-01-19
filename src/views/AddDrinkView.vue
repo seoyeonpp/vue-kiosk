@@ -28,7 +28,7 @@
                                 </v-col>
                                 <v-col>
                                     <div class="img_attach_layout">
-                                        <v-img :src="require(`@/assets/images/${imgUrl}`)"></v-img>
+                                        <v-img :src="this.imgUrl"></v-img>
                                         <v-file-input
                                             label="File input"
                                             hide-input
@@ -46,17 +46,19 @@
                                         v-model="temperType"
                                         label="hot"
                                         color="red"
-                                        value="hot"
+                                        value="0"
                                         hide-details
                                         class="ma-0 pa-0 d-inline-flex"
+                                        ref="temper"
                                     />
                                     <v-checkbox
                                         v-model="temperType"
                                         label="ice"
                                         color="indigo"
-                                        value="ice"
+                                        value="1"
                                         hide-details
                                         class="ma-0 ml-3 pa-0 d-inline-flex"
+                                        ref="temper"
                                     />
                                 </v-col>
                             </v-row>
@@ -64,8 +66,8 @@
                                 <v-col :cols="3">우유 변경 가능</v-col>
                                 <v-col :cols="9">
                                     <v-radio-group v-model="milkOpt" row class="ma-0" mandatory>
-                                        <v-radio label="off" color="error" value="off" class="ma-0 mr-3 pa-0 d-inline-flex" />
-                                        <v-radio label="on" color="success" value="on" class="ma-0 pa-0 d-inline-flex" />
+                                        <v-radio label="on" color="success" value="0" class="ma-0 mr-3 pa-0 d-inline-flex" />
+                                        <v-radio label="off" color="error" value="1" class="ma-0 pa-0 d-inline-flex" />
                                     </v-radio-group>
                                 </v-col>
                             </v-row>
@@ -73,8 +75,8 @@
                                 <v-col :cols="3">샷 추가 옵션</v-col>
                                 <v-col :cols="9">
                                     <v-radio-group v-model="shotOpt" row class="ma-0" mandatory>
-                                        <v-radio label="off" color="error" value="off" class="ma-0 mr-3 pa-0 d-inline-flex" />
-                                        <v-radio label="on" color="success" value="on" class="ma-0 pa-0 d-inline-flex" />
+                                        <v-radio label="on" color="success" value="0" class="ma-0 mr-3 pa-0 d-inline-flex" />
+                                        <v-radio label="off" color="error" value="1" class="ma-0 pa-0 d-inline-flex" />
                                     </v-radio-group>
                                 </v-col>
                             </v-row>
@@ -91,48 +93,53 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, maxLength } from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 
 export default {
     mixins: [validationMixin],
     validations: {
-        name: { required, maxLength: maxLength(10) },
+        name: { required },
         cost: { required },
-        checkbox: {
-            checked(val) {
-                return val;
-            },
-        },
     },
     data: () => ({
         name: "",
         cost: "",
-        checkbox: false,
-        imgUrl: "temp.jpg",
+        imgUrl: "",
+        file: null,
         milkOpt: null,
         shotOpt: null,
         temperType: [],
     }),
     methods: {
         submit() {
+            const form = new FormData();
+            form.append("menuImg", this.file);
+            form.append("menuName", this.name);
+            form.append("menuCost", this.cost);
+            form.append("temp", this.temperType.length > 1 ? `${this.temperType[0]},${this.temperType[1]}` : `${this.temperType[0]}`);
+            form.append("milk", this.milkOpt);
+            form.append("shot", this.shotOpt);
+
+            const response = this.$store.dispatch("INSERT_DRINK", form);
+            response.then((res) => {
+                if (res === undefined) return;
+                this.$router.push("/");
+            });
             this.$v.$touch();
         },
+
         changeImg(file) {
-            console.log(file);
-            this.imgUrl = file.name;
+            this.imgUrl = URL.createObjectURL(file);
+            this.file = file;
         },
     },
     computed: {
-        checkboxErrors() {
-            const errors = [];
-            if (!this.$v.checkbox.$dirty) return errors;
-            !this.$v.checkbox.checked && errors.push("You must agree to continue!");
-            return errors;
+        setImgUrl() {
+            return this.imgUrl === "" && "@/assets/images/temp.jpg";
         },
         nameErrors() {
             const errors = [];
             if (!this.$v.name.$dirty) return errors;
-            !this.$v.name.maxLength && errors.push("Name must be at most 10 characters long");
             !this.$v.name.required && errors.push("Name is required.");
             return errors;
         },
