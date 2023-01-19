@@ -13,7 +13,7 @@
                 <button class="blue-btn">결제하기</button>
             </div>
             <div v-if="isAdmin">
-                <button class="yellow-btn">메뉴추가</button>
+                <router-link to="/addDrink" class="yellow-btn">메뉴추가</router-link>
                 <button class="blue-btn">수정완료</button>
             </div>
         </div>
