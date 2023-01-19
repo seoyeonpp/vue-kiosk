@@ -112,16 +112,22 @@ export default {
     }),
     methods: {
         submit() {
-            const form = {
-                menuImg: this.file,
-                menuName: this.name,
-                menuCost: this.cost,
-                temp: `${this.temperType[0]},${this.temperType[1]}`,
-                milk: this.milkOpt,
-                shot: this.shotOpt,
-            };
+            const form = new FormData();
+            form.append("menuImg", this.file);
+            form.append("menuName", this.name);
+            form.append("menuCost", this.cost);
+            form.append("temp", this.temperType.length > 1 ? `${this.temperType[0]},${this.temperType[1]}` : `${this.temperType[0]}`);
+            form.append("milk", this.milkOpt);
+            form.append("shot", this.shotOpt);
+
+            const response = this.$store.dispatch("INSERT_DRINK", form);
+            response.then((res) => {
+                if (res === undefined) return;
+                this.$router.push("/");
+            });
             this.$v.$touch();
         },
+
         changeImg(file) {
             this.imgUrl = URL.createObjectURL(file);
             this.file = file;
