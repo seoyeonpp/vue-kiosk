@@ -5,4 +5,7 @@ export default {
     SET_DRINK_LIST(state, { item: { menuList } }) {
         state.drinkList = menuList;
     },
+    DELETE_BASKET_ITEM(state, payload) {
+        state.basketItem = state.basketItem.filter((item) => item.menuSeq !== payload);
+    },
 };
