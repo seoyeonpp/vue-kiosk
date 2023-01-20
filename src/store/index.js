@@ -14,7 +14,8 @@ export const store = new Vuex.Store({
                 menuSeq: 18,
                 menuName: "따듯라",
                 menuCost: 100,
-                menuImg: "https://reflexion-bucket.s3.ap-northeast-2.amazonaws.com/public/study/kiosk/temp/cc5dde0a-6b4d-4ce6-bee5-fbe16b4a297bC9A4F364-E88F-484D-861C-7D50C3D9DB28.jpeg",
+                menuImg:
+                    "https://reflexion-bucket.s3.ap-northeast-2.amazonaws.com/public/study/kiosk/temp/cc5dde0a-6b4d-4ce6-bee5-fbe16b4a297bC9A4F364-E88F-484D-861C-7D50C3D9DB28.jpeg",
                 menuOptionMap: {
                     1: [
                         {
@@ -30,7 +31,8 @@ export const store = new Vuex.Store({
                 menuSeq: 20,
                 menuName: "latte",
                 menuCost: 50,
-                menuImg: "https://reflexion-bucket.s3.ap-northeast-2.amazonaws.com/public/study/kiosk/temp/37e676c7-4e26-4fc7-8949-3ed98edce1eebikiniCity.jpg",
+                menuImg:
+                    "https://reflexion-bucket.s3.ap-northeast-2.amazonaws.com/public/study/kiosk/temp/37e676c7-4e26-4fc7-8949-3ed98edce1eebikiniCity.jpg",
                 menuOptionMap: {
                     1: [
                         {

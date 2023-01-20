@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters } from "vuex";
 export default {
     data() {
         return {
@@ -50,6 +50,7 @@ export default {
     },
     created() {
         this.funcSumCost(this.basketItem, "+");
+        // console.log(this.$store.state.basketItem);
     },
     updated() {
         this.$nextTick(() => {});
