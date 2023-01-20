@@ -1,8 +1,18 @@
 .v-footer {
     position: relative;
     z-index: 99999;
-    div:has(.basket-footer) {
+    width: 100%;
+
+    .v-btn-group {
         width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-content: center;
+        .v-btn {
+            height: auto !important;
+            padding: 20px !important;
+        }
     }
 }
 

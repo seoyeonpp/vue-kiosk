@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import MainView from "@/views/MainView";
 import AddDrinkView from "@/views/AddDrinkView";
 import AddBasketView from "@/views/AddBasketView";
+import CheckPhone from "@/views/CheckPhone";
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,10 @@ export const router = new VueRouter({
         {
             path: "/drink/:id",
             component: AddBasketView,
+        },
+        {
+            path: "/phone",
+            component: CheckPhone,
         },
     ],
 });
