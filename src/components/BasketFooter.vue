@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters } from "vuex";
 export default {
     data() {
         return {
@@ -46,13 +46,16 @@ export default {
             this.funcSumCost(this.basketItem, "-");
         },
         funcSumCost(basketItem, operator) {
-            // console.log(operator);
             operator === "+" ? basketItem.map((item) => (this.sumCost += item.menuCost)) : basketItem.map((item) => (this.sumCost -= item.menuCost));
+            if (basketItem.length == 0) this.sumCost = 0;
         },
     },
     created() {
         this.funcSumCost(this.basketItem, "+");
         // console.log(this.$store.state.basketItem);
+    },
+    updated() {
+        this.$nextTick(() => {});
     },
 };
 </script>
