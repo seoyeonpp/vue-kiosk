@@ -46,12 +46,13 @@ export default {
             this.funcSumCost(this.basketItem, "-");
         },
         funcSumCost(basketItem, operator) {
-            console.log(operator);
+            // console.log(operator);
             operator === "+" ? basketItem.map((item) => (this.sumCost += item.menuCost)) : basketItem.map((item) => (this.sumCost -= item.menuCost));
         },
     },
     created() {
         this.funcSumCost(this.basketItem, "+");
+        // console.log(this.$store.state.basketItem);
     },
 };
 </script>

@@ -6,7 +6,7 @@
         </button>
         <v-row>
             <v-col v-for="(drink, index) in drinkList" :key="index" cols="4">
-                <router-link to="/">
+                <router-link :to="`/drink/${drink.menuSeq}`">
                     <v-card class="drink-card">
                         <button @click="deleteCard(drink.menuSeq)" v-if="isAdmin" class="delete-btn">삭제</button>
                         <div class="drink-img"><img :src="drink.menuImg" alt="" /></div>
@@ -39,7 +39,7 @@ export default {
         },
         deleteCard(menuSeq) {
             const res = this.$store.dispatch("DELETE_DRINK_LIST", menuSeq);
-            res.then((res) => {
+            res.then(() => {
                 this.$store.dispatch("GET_DRINK_LIST");
             });
         },
