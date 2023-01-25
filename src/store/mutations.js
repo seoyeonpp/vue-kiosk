@@ -9,7 +9,6 @@ export default {
         state.basketItem = state.basketItem.filter((item) => item.menuSeq !== payload);
     },
     ADD_BASKET_ITEM(state, item) {
-        console.log(state.basketItem);
         state.basketItem.push(item);
     },
 };

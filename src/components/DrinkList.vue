@@ -5,10 +5,10 @@
             <span v-if="isAdmin">손님</span>
         </button>
         <v-row>
-            <v-col v-for="(drink, index) in drinkList" :key="index" cols="4">
+            <v-col v-for="(drink, index) in drinkList" :key="index" cols="4" style="position: relative">
+                <button @click="deleteCard(drink.menuSeq)" v-if="isAdmin" class="delete-btn">삭제</button>
                 <router-link :to="`/drink/${drink.menuSeq}`">
                     <v-card class="drink-card">
-                        <button @click="deleteCard(drink.menuSeq)" v-if="isAdmin" class="delete-btn">삭제</button>
                         <div class="drink-img"><img :src="drink.menuImg" alt="" /></div>
                         <div class="drink-info">
                             <h3>{{ drink.menuName }}</h3>

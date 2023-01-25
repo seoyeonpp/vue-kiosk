@@ -25,7 +25,7 @@
                                     </v-radio-group>
                                 </v-col>
                             </v-row>
-                            <v-row class="mt-6" v-if="this.obj?.menuOptionMap[2]">
+                            <v-row class="mt-6" v-if="this.obj.menuOptionMap?.[2]">
                                 <v-col :cols="3">우유 변경</v-col>
                                 <v-col :cols="9">
                                     <v-radio-group v-model="milkOpt" row class="ma-0" mandatory>
@@ -35,7 +35,7 @@
                                     </v-radio-group>
                                 </v-col>
                             </v-row>
-                            <v-row v-if="this.obj?.menuOptionMap[3]">
+                            <v-row v-if="this.obj?.menuOptionMap?.[3]">
                                 <v-col :cols="3">샷 추가</v-col>
                                 <v-col :cols="9">
                                     <v-radio-group v-model="shotOpt" row class="ma-0" mandatory>
@@ -70,6 +70,8 @@ export default {
         submit() {
             const menu = {
                 menuSeq: this.obj.menuSeq,
+                menuName: this.obj.menuName,
+                menuCost: this.obj.menuCost,
                 orderMilk: this.milkOpt,
                 orderShot: this.shotOpt,
                 orderTemp: this.temperType,
@@ -84,7 +86,6 @@ export default {
         const response = this.$store.dispatch("FETCH_DRINK", menuSeq);
         response.then(({ data: { item } }) => {
             this.obj = item;
-            // console.log(this.obj);
         });
     },
 };

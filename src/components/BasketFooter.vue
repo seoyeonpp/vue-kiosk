@@ -18,7 +18,7 @@
         </div>
         <div v-if="isAdmin">
             <router-link to="/addDrink" class="yellow-btn">메뉴추가</router-link>
-            <button class="blue-btn">수정완료</button>
+            <button class="blue-btn" @click="changeAdmin">수정완료</button>
         </div>
     </div>
 </template>
@@ -41,19 +41,22 @@ export default {
     methods: {
         deleteMenu(menuSeq) {
             this.$store.commit("DELETE_BASKET_ITEM", menuSeq);
-            this.funcSumCost(this.basketItem, "-");
+            this.minusCost(menuSeq);
         },
-        funcSumCost(basketItem, operator) {
-            operator === "+" ? basketItem.map((item) => (this.sumCost += item.menuCost)) : basketItem.map((item) => (this.sumCost -= item.menuCost));
-            if (basketItem.length == 0) this.sumCost = 0;
+        initCost() {
+            this.sumCost = 0;
+            this.basketItem.map((item) => (this.sumCost += item.menuCost));
+        },
+        minusCost(menuSeq) {
+            this.basketItem.filter((item) => item.menuSeq !== menuSeq);
+            this.initCost();
+        },
+        changeAdmin() {
+            this.$store.commit("SET_ADMIN", false);
         },
     },
     created() {
-        this.funcSumCost(this.basketItem, "+");
-        // console.log(this.$store.state.basketItem);
-    },
-    updated() {
-        this.$nextTick(() => {});
+        this.initCost();
     },
 };
 </script>
