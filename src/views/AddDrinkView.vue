@@ -9,57 +9,21 @@
                             <h3 class="text-h3 font-weight-bold text-center">음료 등록</h3>
                             <v-row>
                                 <v-col>
-                                    <v-text-field
-                                        v-model="name"
-                                        :error-messages="nameErrors"
-                                        label="Name"
-                                        required
-                                        @input="$v.name.$touch()"
-                                        @blur="$v.name.$touch()"
-                                    ></v-text-field>
-                                    <v-text-field
-                                        v-model="cost"
-                                        :error-messages="costErrors"
-                                        label="Cost"
-                                        required
-                                        @input="$v.cost.$touch()"
-                                        @blur="$v.cost.$touch()"
-                                    ></v-text-field>
+                                    <v-text-field v-model="name" :error-messages="nameErrors" label="Name" required @input="$v.name.$touch()" @blur="$v.name.$touch()"></v-text-field>
+                                    <v-text-field v-model="cost" :error-messages="costErrors" label="Cost" required @input="$v.cost.$touch()" @blur="$v.cost.$touch()"></v-text-field>
                                 </v-col>
                                 <v-col>
                                     <div class="img_attach_layout">
                                         <v-img :src="this.imgUrl"></v-img>
-                                        <v-file-input
-                                            label="File input"
-                                            hide-input
-                                            filled
-                                            prepend-icon="mdi-camera"
-                                            @change="changeImg"
-                                        ></v-file-input>
+                                        <v-file-input label="File input" hide-input filled prepend-icon="mdi-camera" @change="changeImg"></v-file-input>
                                     </div>
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col :cols="3">제공 온도</v-col>
                                 <v-col :cols="9">
-                                    <v-checkbox
-                                        v-model="temperType"
-                                        label="hot"
-                                        color="red"
-                                        value="0"
-                                        hide-details
-                                        class="ma-0 pa-0 d-inline-flex"
-                                        ref="temper"
-                                    />
-                                    <v-checkbox
-                                        v-model="temperType"
-                                        label="ice"
-                                        color="indigo"
-                                        value="1"
-                                        hide-details
-                                        class="ma-0 ml-3 pa-0 d-inline-flex"
-                                        ref="temper"
-                                    />
+                                    <v-checkbox v-model="temperType" label="hot" color="red" value="0" hide-details class="ma-0 pa-0 d-inline-flex" ref="temper" />
+                                    <v-checkbox v-model="temperType" label="ice" color="indigo" value="1" hide-details class="ma-0 ml-3 pa-0 d-inline-flex" ref="temper" />
                                 </v-col>
                             </v-row>
                             <v-row class="mt-6">
