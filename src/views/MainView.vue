@@ -15,14 +15,9 @@
 import BasketFooter from "@/components/BasketFooter.vue";
 import DrinkList from "@/components/DrinkList.vue";
 export default {
-    data() {
-        return {};
-    },
     components: {
         BasketFooter,
         DrinkList,
     },
 };
 </script>
-
-<style></style>

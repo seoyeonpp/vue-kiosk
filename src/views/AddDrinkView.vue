@@ -1,101 +1,90 @@
 <template>
     <div>
-        <form>
-            <v-main>
-                <v-container>
-                    <div class="panel__layout">
-                        <div class="panel__layout_inner">
-                            <router-link to="/" class="back-btn"><v-btn color="primary" elevation="2">뒤로 가기</v-btn></router-link>
-                            <h3 class="text-h3 font-weight-bold text-center">음료 등록</h3>
-                            <v-row>
-                                <v-col>
-                                    <v-text-field
-                                        v-model="name"
-                                        :error-messages="nameErrors"
-                                        label="Name"
-                                        required
-                                        @input="$v.name.$touch()"
-                                        @blur="$v.name.$touch()"
-                                    ></v-text-field>
-                                    <v-text-field
-                                        v-model="cost"
-                                        :error-messages="costErrors"
-                                        label="Cost"
-                                        required
-                                        @input="$v.cost.$touch()"
-                                        @blur="$v.cost.$touch()"
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col>
-                                    <div class="img_attach_layout">
-                                        <v-img :src="this.imgUrl"></v-img>
-                                        <v-file-input
-                                            label="File input"
-                                            hide-input
-                                            filled
-                                            prepend-icon="mdi-camera"
-                                            @change="changeImg"
-                                        ></v-file-input>
-                                    </div>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col :cols="3">제공 온도</v-col>
-                                <v-col :cols="9">
-                                    <v-checkbox
-                                        v-model="temperType"
-                                        label="hot"
-                                        color="red"
-                                        value="0"
-                                        hide-details
-                                        class="ma-0 pa-0 d-inline-flex"
-                                        ref="temper"
-                                    />
-                                    <v-checkbox
-                                        v-model="temperType"
-                                        label="ice"
-                                        color="indigo"
-                                        value="1"
-                                        hide-details
-                                        class="ma-0 ml-3 pa-0 d-inline-flex"
-                                        ref="temper"
-                                    />
-                                </v-col>
-                            </v-row>
-                            <v-row class="mt-6">
-                                <v-col :cols="3">우유 변경 가능</v-col>
-                                <v-col :cols="9">
-                                    <v-radio-group v-model="milkOpt" row class="ma-0" mandatory>
-                                        <v-radio label="on" color="success" value="0" class="ma-0 mr-3 pa-0 d-inline-flex" />
-                                        <v-radio label="off" color="error" value="1" class="ma-0 pa-0 d-inline-flex" />
-                                    </v-radio-group>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col :cols="3">샷 추가 옵션</v-col>
-                                <v-col :cols="9">
-                                    <v-radio-group v-model="shotOpt" row class="ma-0" mandatory>
-                                        <v-radio label="on" color="success" value="0" class="ma-0 mr-3 pa-0 d-inline-flex" />
-                                        <v-radio label="off" color="error" value="1" class="ma-0 pa-0 d-inline-flex" />
-                                    </v-radio-group>
-                                </v-col>
-                            </v-row>
+        <FormDetail>
+            <template #page-title>음료 등록</template>
+            <template slot="page-contents">
+                <v-row>
+                    <v-col>
+                        <v-text-field
+                            v-model="name"
+                            :error-messages="nameErrors"
+                            label="Name"
+                            required
+                            @input="$v.name.$touch()"
+                            @blur="$v.name.$touch()"
+                        ></v-text-field>
+                        <v-text-field
+                            v-model="cost"
+                            :error-messages="costErrors"
+                            label="Cost"
+                            required
+                            @input="$v.cost.$touch()"
+                            @blur="$v.cost.$touch()"
+                        ></v-text-field>
+                    </v-col>
+                    <v-col>
+                        <div class="img_attach_layout">
+                            <v-img :src="this.imgUrl"></v-img>
+                            <v-file-input label="File input" hide-input filled prepend-icon="mdi-camera" @change="changeImg"></v-file-input>
                         </div>
-                    </div>
-                </v-container>
-            </v-main>
-            <v-footer padless>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col :cols="3">제공 온도</v-col>
+                    <v-col :cols="9">
+                        <v-checkbox
+                            v-model="temperType"
+                            label="hot"
+                            color="red"
+                            value="0"
+                            hide-details
+                            class="ma-0 pa-0 d-inline-flex"
+                            ref="temper"
+                        />
+                        <v-checkbox
+                            v-model="temperType"
+                            label="ice"
+                            color="indigo"
+                            value="1"
+                            hide-details
+                            class="ma-0 ml-3 pa-0 d-inline-flex"
+                            ref="temper"
+                        />
+                    </v-col>
+                </v-row>
+                <v-row class="mt-6">
+                    <v-col :cols="3">우유 변경 가능</v-col>
+                    <v-col :cols="9">
+                        <v-radio-group v-model="milkOpt" row class="ma-0" mandatory>
+                            <v-radio label="on" color="success" value="0" class="ma-0 mr-3 pa-0 d-inline-flex" />
+                            <v-radio label="off" color="error" value="1" class="ma-0 pa-0 d-inline-flex" />
+                        </v-radio-group>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col :cols="3">샷 추가 옵션</v-col>
+                    <v-col :cols="9">
+                        <v-radio-group v-model="shotOpt" row class="ma-0" mandatory>
+                            <v-radio label="on" color="success" value="0" class="ma-0 mr-3 pa-0 d-inline-flex" />
+                            <v-radio label="off" color="error" value="1" class="ma-0 pa-0 d-inline-flex" />
+                        </v-radio-group>
+                    </v-col>
+                </v-row>
+            </template>
+            <template #page-footer>
                 <v-btn block @click="submit"> 음료추가 </v-btn>
-            </v-footer>
-        </form>
+            </template>
+        </FormDetail>
     </div>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
+import FormDetail from "@/components/FormDetail.vue";
 
 export default {
+    components: { FormDetail },
     mixins: [validationMixin],
     validations: {
         name: { required },
