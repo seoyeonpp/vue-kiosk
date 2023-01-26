@@ -44,9 +44,6 @@ export default {
             });
         },
     },
-    mounted() {
-        this.$store.dispatch("GET_DRINK_LIST");
-    },
 };
 </script>
 
