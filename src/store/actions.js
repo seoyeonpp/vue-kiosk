@@ -1,4 +1,4 @@
-import { deleteList, mainList, addMenu, drinkDetail, orderDrink } from "@/api/index.js";
+import { deleteList, mainList, addMenu, drinkDetail, orderDrink, checkMember } from "@/api/index.js";
 
 export default {
     async GET_DRINK_LIST(context) {
@@ -34,8 +34,14 @@ export default {
     },
     async ORDER_DRINK(context, drinkOpt) {
         try {
-            const res = await orderDrink(drinkOpt);
-            return res;
+            return await orderDrink(drinkOpt);
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    async CHECK_MEMBER(context, phoneNum) {
+        try {
+            return await checkMember(phoneNum);
         } catch (error) {
             console.log(error);
         }

@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
         drinkList: [],
         isAdmin: false,
         basketItem: [],
+        // dialog: false,
     },
     getters: {
         getDrinkList(state) {
@@ -18,6 +19,9 @@ export const store = new Vuex.Store({
         getIsAdmin(state) {
             return state.isAdmin;
         },
+        // getIsDialog(state) {
+        //     return state.dialog;
+        // },
         getBasketItem(state) {
             return state.basketItem;
         },
