@@ -10,3 +10,4 @@ export const addMenu = (drinkObj) => axios.post(`${config.BASE_URL}/manage/menu/
 export const drinkDetail = (menuSeq) => axios.get(`${config.BASE_URL}/api/menu/${menuSeq}`);
 export const orderDrink = (drinkOpt) => axios.post(`${config.BASE_URL}/api/order/`, drinkOpt);
 export const checkMember = (phoneNum) => axios.post(`${config.BASE_URL}/api/order/check`, phoneNum);
+export const checkPoint = (phoneNum) => axios.post(`${config.BASE_URL}/api/order/point`, phoneNum);

@@ -33,3 +33,25 @@
     left: 50px;
     top: 50px;
 }
+.admin-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    background-color: $light-yellow;
+    color: $text-color;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.point-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    background-color: $light-yellow;
+    color: $text-color;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
