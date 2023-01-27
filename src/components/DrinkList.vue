@@ -23,6 +23,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import bus from "@/utils/bus.js";
 export default {
     data() {
         return {};
@@ -38,11 +39,17 @@ export default {
             this.$store.commit("SET_ADMIN");
         },
         deleteCard(menuSeq) {
+            bus.$emit("start:loading");
             const res = this.$store.dispatch("DELETE_DRINK_LIST", menuSeq);
             res.then(() => {
                 this.$store.dispatch("GET_DRINK_LIST");
+            }).then(() => {
+                bus.$emit("end:loading");
             });
         },
+    },
+    mounted() {
+        bus.$emit("end:loading");
     },
 };
 </script>

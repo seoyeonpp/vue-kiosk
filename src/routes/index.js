@@ -5,6 +5,7 @@ import AddDrinkView from "@/views/AddDrinkView";
 import AddBasketView from "@/views/AddBasketView";
 import CheckPhone from "@/views/CheckPhone";
 import { store } from "@/store/index";
+import bus from "@/utils/bus.js";
 
 Vue.use(VueRouter);
 
@@ -15,9 +16,12 @@ export const router = new VueRouter({
             path: "/",
             component: MainView,
             beforeEnter: (to, from, next) => {
+                bus.$emit("start:loading");
                 store
                     .dispatch("GET_DRINK_LIST")
-                    .then(() => next())
+                    .then(() => {
+                        next();
+                    })
                     .catch((error) => console.log(error));
             },
         },

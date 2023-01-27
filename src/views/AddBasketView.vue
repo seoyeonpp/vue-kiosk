@@ -105,6 +105,7 @@
 
 <script>
 import FormDetail from "@/components/FormDetail.vue";
+import bus from "@/utils/bus.js";
 export default {
     components: { FormDetail },
     data: () => ({
@@ -131,11 +132,16 @@ export default {
         },
     },
     created() {
+        bus.$emit("start:loading");
         const menuSeq = this.$route.params.id;
         const response = this.$store.dispatch("FETCH_DRINK", menuSeq);
-        response.then(({ data: { item } }) => {
-            this.obj = item;
-        });
+        response
+            .then(({ data: { item } }) => {
+                this.obj = item;
+            })
+            .then(() => {
+                bus.$emit("end:loading");
+            });
     },
 };
 </script>
