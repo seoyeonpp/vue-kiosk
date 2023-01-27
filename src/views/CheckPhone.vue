@@ -70,7 +70,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="green darken-1" text @click="doneOrderAlert = false"> 네 </v-btn>
+                        <router-link to="/" color="green darken-1" text @click="doneOrderAlert = false"> 네 </router-link>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -144,6 +144,9 @@ export default {
                 this.phoneAlert = false;
                 this.newMemAlert = false;
                 this.cancelRegAlert = false;
+                setTimeout(() => {
+                    this.$router.push("/");
+                }, 5000);
             });
         },
     },
