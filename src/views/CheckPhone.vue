@@ -17,27 +17,60 @@
                 <v-btn block class="blue-btn" @click="checkMember"> 포인트 적립하기 </v-btn>
             </div>
         </v-footer>
+
+        <!-- Dialog -->
         <v-row justify="center">
-            <v-dialog v-model="dialog" persistent max-width="290">
-                <v-card v-if="isMember">
-                    <v-card-text class="pt-6">
-                        <v-card-title class="text-h5"> 휴대폰 번호를 <br />입력해주세요</v-card-title>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="green darken-1" text @click="dialog = false"> 네 </v-btn>
-                    </v-card-actions>
-                </v-card>
+            <v-dialog v-model="phoneAlert" persistent max-width="290">
                 <v-card>
                     <v-card-text class="pt-6">
                         <v-card-title class="text-h5"> 휴대폰 번호를 <br />입력해주세요</v-card-title>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <!-- <slot name="button"></slot> -->
-                        <v-btn color="green darken-1" text @click="dialog = false"> 네 </v-btn>
-                        <!-- <v-btn color="green darken-1" text @click="getIsDialog = false"> 아니요 </v-btn>
-                    <v-btn color="green darken-1" text @click="getIsDialog = false"> 네 </v-btn> -->
+                        <v-btn color="green darken-1" text @click="phoneAlert = false"> 네 </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+            <v-dialog v-model="newMemAlert" persistent max-width="290">
+                <v-card>
+                    <v-card-text class="pt-6">
+                        <v-card-title class="text-h5">신규 회원입니다.<br />가입하시겠어요?</v-card-title>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="green darken-1"
+                            text
+                            @click="
+                                newMemAlert = false;
+                                cancelRegAlert = true;
+                            "
+                        >
+                            아니요
+                        </v-btn>
+                        <v-btn color="green darken-1" text @click="payFunc"> 네 </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+            <v-dialog v-model="cancelRegAlert" persistent max-width="290">
+                <v-card>
+                    <v-card-text class="pt-6">
+                        <v-card-title class="text-h5">회원 가입을 취소하셨습니다. <br />결제창으로 넘어갑니다. </v-card-title>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="green darken-1" text @click="payFunc"> 네 </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+            <v-dialog v-model="doneOrderAlert" persistent max-width="290">
+                <v-card>
+                    <v-card-text class="pt-6">
+                        <v-card-title class="text-h5">결제가 완료되었습니다</v-card-title>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="green darken-1" text @click="doneOrderAlert = false"> 네 </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -59,7 +92,10 @@ export default {
     data() {
         return {
             phoneNum: "",
-            dialog: false,
+            phoneAlert: false,
+            newMemAlert: false,
+            cancelRegAlert: false,
+            doneOrderAlert: false,
             isMember: Boolean,
         };
     },
@@ -75,8 +111,8 @@ export default {
         //     this.phoneNum = "";
         // },
         checkMember() {
-            if (this.phoneNum === "") {
-                this.dialog = true;
+            if (this.phoneNum == "") {
+                this.phoneAlert = true;
             } else {
                 const phone = {
                     phoneNum: this.phoneNum,
@@ -85,12 +121,13 @@ export default {
                     .dispatch("CHECK_MEMBER", phone)
                     .then(({ data }) => {
                         this.isMember = data.success;
-                        data.success ? this.payFunc() : (this.dialog = true);
+                        data.success ? this.payFunc() : (this.newMemAlert = true);
                     })
                     .catch((err) => console.log(err));
             }
         },
         payFunc() {
+            this.cancelRegAlert = false;
             const orderList = [];
             this.getBasketItem.map((item) => {
                 const temp = {
@@ -103,7 +140,10 @@ export default {
                 orderList.push(temp);
             });
             this.$store.dispatch("ORDER_DRINK", orderList).then(() => {
-                alert("결제가 완료되었습니다");
+                this.doneOrderAlert = true;
+                this.phoneAlert = false;
+                this.newMemAlert = false;
+                this.cancelRegAlert = false;
             });
         },
     },
